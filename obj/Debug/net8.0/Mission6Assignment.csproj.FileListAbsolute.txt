@@ -131,3 +131,4 @@
 /Users/gutblue/RiderProjects/Mission6Assignment/Mission6Assignment/bin/Debug/net8.0/runtimes/win-x86/native/e_sqlite3.dll
 /Users/gutblue/RiderProjects/Mission6Assignment/Mission6Assignment/obj/Debug/net8.0/Mission6Assignment.csproj.AssemblyReference.cache
 /Users/gutblue/RiderProjects/Mission6Assignment/Mission6Assignment/obj/Debug/net8.0/Mission6.FB4B2233.Up2Date
+/Users/gutblue/RiderProjects/Mission6Assignment/Mission6Assignment/obj/Debug/net8.0/Mission6Assignment.sourcelink.json
