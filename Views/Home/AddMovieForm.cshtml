@@ -1,0 +1,77 @@
+@model Movie
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Add Movie to Collection</title>
+</head>
+<body>
+<div>
+    <!--Creating my form for adding a new movie-->
+    <form method="post">
+        <label asp-for="CategoryName">Category:</label>
+        <input asp-for="CategoryName"/>
+        <br/>
+
+        <label asp-for="MovieTitle">Movie Title:</label>
+        <input asp-for="MovieTitle" placeholder="e.g. Frozen"/>
+        <br/>
+
+        <label asp-for="MovieYear">Initial Release Year:</label>
+        <input asp-for="MovieYear" placeholder="e.g. 2018"/>
+        <br/>
+
+        <label asp-for="DirectorFirstName">Director's First Name:</label>
+        <input asp-for="DirectorFirstName"/>
+        <br/>
+
+        <label asp-for="DirectorLastName">Director's Last Name:</label>
+        <input asp-for="DirectorLastName"/>
+        <br/>
+
+        <label asp-for="MovieRating">Parental Guidance Rating:</label>
+        <select asp-for="MovieRating">
+            <option value="">--Select a Rating--</option>
+            <option value="NR">No Rating/Unrated</option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+            <option value="NC-17">NC-17</option>
+            <option value="TV-Y">TV-Y</option>
+            <option value="TV-Y7">TV-Y7</option>
+            <option value="TV-Y7-FV">TV-Y7-FV</option>
+            <option value="TV-G">TV-G</option>
+            <option value="TV-PG">TV-PG</option>
+            <option value="TV-14">TV-14</option>
+            <option value="TV-MA">TV-MA</option>
+        </select>
+        <span asp-validation-for="MovieRating" class="text-danger"></span>
+        <br/>
+
+        <label asp-for="Edited">Was the Movie Edited?</label>
+        <select asp-name="Edited">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <br/>
+
+        <label asp-for="LentTo">Who is the Movie Lent To?:</label>
+        <input asp-for="LentTo" placeholder="Leave blank if NA"/>
+        <br/>
+
+        <label asp-for="Notes">Additional Notes:</label>
+        <input asp-for="Notes" placeholder="25 characters or less" maxlength="25"/>
+        <br/>
+
+        <!--Submit form-->
+        <button type="submit">Add Movie to Database</button>
+    </form>
+</div>
+</body>
+</html>

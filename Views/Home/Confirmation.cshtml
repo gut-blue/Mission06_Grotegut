@@ -1,0 +1,24 @@
+@model Movie
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Confirmed!</title>
+</head>
+<body>
+<div>
+    <!--Notifies that data was entered successfully-->
+    <h1>Thank you, "@Model.MovieTitle" Has Been Added!</h1>
+    <br/>
+
+    <!--Gives the user the option to add another movie if interested-->
+    <a asp-controller="Home" asp-action="AddMovieForm">Click here to Add Another Movie</a>
+    <br/>
+</div>
+</body>
+</html>
