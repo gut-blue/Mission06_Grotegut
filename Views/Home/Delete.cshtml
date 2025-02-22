@@ -1,0 +1,28 @@
+@model Movie
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Delete Confirmation</title>
+</head>
+<body>
+<div>
+    <h2>Confirm Deletion?</h2>
+    <h3>@Model.Title, @Model.Director</h3>
+    <form method="post">
+        <!--This fixed the delete functionality, the MovieId needs 
+        to be referenced inside the form, otherwise it just assumes 
+        the ID is 0 and so no real record is deleted.-->
+        <input type="hidden" asp-for="MovieId"/>
+
+        <button type="submit">Delete?</button>
+        <a class="btn btn-info" asp-controller="Home" asp-action="Movielist">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

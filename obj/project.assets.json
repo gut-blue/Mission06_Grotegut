@@ -2426,11 +2426,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/gutblue/RiderProjects/Mission6Assignment/Mission6Assignment/Mission6Assignment.csproj",
+      "projectUniqueName": "/Users/gutblue/RiderProjects/M7 Videos Practice/Mission6Assignment/Mission6Assignment.csproj",
       "projectName": "Mission6Assignment",
-      "projectPath": "/Users/gutblue/RiderProjects/Mission6Assignment/Mission6Assignment/Mission6Assignment.csproj",
+      "projectPath": "/Users/gutblue/RiderProjects/M7 Videos Practice/Mission6Assignment/Mission6Assignment.csproj",
       "packagesPath": "/Users/gutblue/.nuget/packages/",
-      "outputPath": "/Users/gutblue/RiderProjects/Mission6Assignment/Mission6Assignment/obj/",
+      "outputPath": "/Users/gutblue/RiderProjects/M7 Videos Practice/Mission6Assignment/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/gutblue/.nuget/NuGet/NuGet.Config"

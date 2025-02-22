@@ -1,0 +1,57 @@
+@model List<Movie>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>List of Movies</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <table class="table table-bordered">
+        <thead class="fw-bold">
+        <tr>
+            <td>Movie Title</td>
+            <td>Director First Name</td>
+            <td>Director Last Name</td>
+            <td>Category</td>
+            <td>Movie Year</td>
+            <td>Movie Rating</td>
+        </tr>
+        </thead>
+        
+        <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Director</td>
+                <td>@movie.Category.CategoryName</td>
+                <td>@movie.Year</td>
+                <td>@movie.Rating</td>
+                <td>@movie.Edited</td>
+                <td>@movie.LentTo</td>
+                <td>@movie.CopiedToPlex</td>
+                <td>@movie.Notes</td>
+                
+
+                <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@movie.MovieId">Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@movie.MovieId">Delete</a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<br/>
+
+<div>
+    <a asp-controller="Home" asp-action="AddMovieForm" class="btn btn-success">Add a New Movie</a>
+</div>
+
+</body>
+</html>

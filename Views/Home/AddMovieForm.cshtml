@@ -14,28 +14,40 @@
 <div>
     <!--Creating my form for adding a new movie-->
     <form method="post">
-        <label asp-for="CategoryName">Category:</label>
-        <input asp-for="CategoryName"/>
+        
+        <!--Must add MovieId to the form even if it's hidden, otherwise
+        when you update a record by default it will just create a new 
+        record instead of updating a current record.-->
+        <input type="hidden" asp-for="MovieId"/>
+        <br/>
+        
+        <!--Creating an instance "c" of Category from my ViewBag.Categories
+        and for each instance of Category in the ViewBag, select the option (the value)
+        will be the CategoryId, and the Name displayed to the User will be the 
+        instance of the associated Category Name related to that number-->
+        <select asp-for="CategoryId">
+            <option value="">Select a Category</option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+        </select>
         <br/>
 
-        <label asp-for="MovieTitle">Movie Title:</label>
-        <input asp-for="MovieTitle" placeholder="e.g. Frozen"/>
+        <label asp-for="Title">Movie Title:</label>
+        <input asp-for="Title" placeholder="e.g. Frozen"/>
         <br/>
 
-        <label asp-for="MovieYear">Initial Release Year:</label>
-        <input asp-for="MovieYear" placeholder="e.g. 2018"/>
+        <label asp-for="Year">Initial Release Year:</label>
+        <input asp-for="Year" placeholder="e.g. 2018"/>
         <br/>
 
-        <label asp-for="DirectorFirstName">Director's First Name:</label>
-        <input asp-for="DirectorFirstName"/>
+        <label asp-for="Director">Director's First & Last Name:</label>
+        <input asp-for="Director"/>
         <br/>
 
-        <label asp-for="DirectorLastName">Director's Last Name:</label>
-        <input asp-for="DirectorLastName"/>
-        <br/>
-
-        <label asp-for="MovieRating">Parental Guidance Rating:</label>
-        <select asp-for="MovieRating">
+        <label asp-for="Rating">Parental Guidance Rating:</label>
+        <select asp-for="Rating">
             <option value="">--Select a Rating--</option>
             <option value="NR">No Rating/Unrated</option>
             <option value="G">G</option>
@@ -51,16 +63,23 @@
             <option value="TV-14">TV-14</option>
             <option value="TV-MA">TV-MA</option>
         </select>
-        <span asp-validation-for="MovieRating" class="text-danger"></span>
+        <span asp-validation-for="Rating" class="text-danger"></span>
         <br/>
 
         <label asp-for="Edited">Was the Movie Edited?</label>
         <select asp-name="Edited">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+            <option value="true">Y</option>
+            <option value="false">N</option>
         </select>
         <br/>
 
+        <label asp-for="CopiedToPlex">Was the Movie Copied to Plex?</label>
+        <select asp-name="CopiedToPlex">
+            <option value="true">Y</option>
+            <option value="false">N</option>
+        </select>
+        <br/>
+        
         <label asp-for="LentTo">Who is the Movie Lent To?:</label>
         <input asp-for="LentTo" placeholder="Leave blank if NA"/>
         <br/>
@@ -71,6 +90,12 @@
 
         <!--Submit form-->
         <button type="submit">Add Movie to Database</button>
+        <br/>
+        
+        <!--Print out validation summary to users of any
+        errors caused by invalid data entry and which
+        fields were invalidly entered.-->
+        <div asp-validation-summary="All"></div>
     </form>
 </div>
 </body>
