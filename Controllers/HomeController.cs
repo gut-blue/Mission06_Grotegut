@@ -16,6 +16,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    // Simple Index and GetToKnowJoel controllers
     public IActionResult Index()
     {
         return View();
@@ -26,6 +27,7 @@ public class HomeController : Controller
         return View();
     }
 
+    // Get and Post controllers for my AddMovieForm view
     [HttpGet]
     public IActionResult AddMovieForm()
     {
@@ -50,6 +52,11 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult AddMovieForm(Movie response)
     {
+        if (response.Year > DateTime.Now.Year)
+        {
+            ModelState.AddModelError("Year", "Movie release year cannot be in the future.");
+        }
+        
         if (ModelState.IsValid)
         {
             _context.Movies.Add(response);  // Adding "Movie" record to the database
@@ -64,27 +71,18 @@ public class HomeController : Controller
         }
     }
 
-    // First ever Linq query
+    // First ever Linq query, bringing in the data from my database and linking it to any edits made on the view.
     public IActionResult Movielist()
     {
         var movies = _context.Movies
-            .Select(m => new 
-            {
-                m.MovieId,
-                m.Title,
-                m.Director,
-                m.Rating,
-                LentTo = m.LentTo ?? "N/A",  // Replace null with "N/A"
-                Notes = m.Notes ?? "N/A"     // Replace null with "N/A"
-            })
+            .Include(m => m.Category)   // Loads Categories table
             .ToList();
-
         // Return the view with the movies data
-        return View("Movielist");  // Pass the movies data to the view
+        return View("Movielist", movies);  // Pass the movies data to the view
     }
 
     
-    // Edit Action Method
+    // Edit Action Method/Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
