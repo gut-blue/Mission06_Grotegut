@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UffDFjdmQB4=",
+  "dgSpecHash": "xWtaKwr7by8=",
   "success": true,
-  "projectFilePath": "/Users/gutblue/RiderProjects/Mission6Assignment/Mission6Assignment/Mission6Assignment.csproj",
+  "projectFilePath": "/Users/gutblue/RiderProjects/M7 Videos Practice/Mission6Assignment/Mission6Assignment.csproj",
   "expectedPackageFiles": [
     "/Users/gutblue/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/gutblue/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
