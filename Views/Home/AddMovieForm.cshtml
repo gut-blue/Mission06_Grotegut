@@ -9,94 +9,163 @@
 <html lang="en">
 <head>
     <title>Add Movie to Collection</title>
+    
+    <!-- Import Bootstrap & Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!--Custom styles for my form so it's not so UG-->
+    <style>
+        /* Fancy Title */
+        .fancy-title {
+            font-family: 'Lobster', cursive;
+            font-size: 2.5rem;
+            color: #dc3545; /* Red */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            margin: auto;
+        }
+
+        /* Input Fields */
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom Button */
+        .btn-custom {
+            background: #28a745;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        /* Labels */
+        label {
+            font-weight: bold;
+            color: #212529;
+        }
+    </style>
 </head>
-<body>
-<div>
-    <!--Creating my form for adding a new movie-->
-    <form method="post">
-        
-        <!--Must add MovieId to the form even if it's hidden, otherwise
-        when you update a record by default it will just create a new 
-        record instead of updating a current record.-->
-        <input type="hidden" asp-for="MovieId"/>
-        <br/>
-        
-        <!--Creating an instance "c" of Category from my ViewBag.Categories
-        and for each instance of Category in the ViewBag, select the option (the value)
-        will be the CategoryId, and the Name displayed to the User will be the 
-        instance of the associated Category Name related to that number-->
-        <select asp-for="CategoryId">
-            <option value="">Select a Category</option>
-            @foreach (Category c in ViewBag.Categories)
-            {
-                <option value="@c.CategoryId">@c.CategoryName</option>
-            }
-        </select>
-        <br/>
+<body class="bg-light">
+<div class="container mt-5">
+    <h1 class="text-center fancy-title">Add New Movie</h1>
+    
+    <div class="form-container">
+        <!--Creating my form for adding a new movie-->
+        <form method="post">
 
-        <label asp-for="Title">Movie Title:</label>
-        <input asp-for="Title" placeholder="e.g. Frozen"/>
-        <br/>
+            <!--Must add MovieId to the form even if it's hidden, otherwise
+            when you update a record by default it will just create a new 
+            record instead of updating a current record.-->
+            <input type="hidden" asp-for="MovieId"/>
+            <br/>
 
-        <label asp-for="Year">Initial Release Year:</label>
-        <input asp-for="Year" placeholder="e.g. 2018"/>
-        <br/>
+            <!--Creating an instance "c" of Category from my ViewBag.Categories
+            and for each instance of Category in the ViewBag, select the option (the value)
+            will be the CategoryId, and the Name displayed to the User will be the 
+            instance of the associated Category Name related to that number-->
+            <div class="mb-3">
+                <select asp-for="CategoryId">
+                    <option value="">Select a Category</option>
+                    @foreach (Category c in ViewBag.Categories)
+                    {
+                        <option value="@c.CategoryId">@c.CategoryName</option>
+                    }
+                </select>
+            </div>
 
-        <label asp-for="Director">Director's First & Last Name:</label>
-        <input asp-for="Director"/>
-        <br/>
+            <div class="mb-3">
+                <label asp-for="Title">Movie Title:</label>
+                <input asp-for="Title" placeholder="e.g. Frozen" required/>
+            </div>
 
-        <label asp-for="Rating">Parental Guidance Rating:</label>
-        <select asp-for="Rating">
-            <option value="">--Select a Rating--</option>
-            <option value="NR">No Rating/Unrated</option>
-            <option value="G">G</option>
-            <option value="PG">PG</option>
-            <option value="PG-13">PG-13</option>
-            <option value="R">R</option>
-            <option value="NC-17">NC-17</option>
-            <option value="TV-Y">TV-Y</option>
-            <option value="TV-Y7">TV-Y7</option>
-            <option value="TV-Y7-FV">TV-Y7-FV</option>
-            <option value="TV-G">TV-G</option>
-            <option value="TV-PG">TV-PG</option>
-            <option value="TV-14">TV-14</option>
-            <option value="TV-MA">TV-MA</option>
-        </select>
-        <span asp-validation-for="Rating" class="text-danger"></span>
-        <br/>
+            <div class="mb-3">
+                <label asp-for="Year">Initial Release Year:</label>
+                <input asp-for="Year" placeholder="e.g. 2018" required min="1888" max="@DateTime.Now.Year"/>
+            </div>
 
-        <label asp-for="Edited">Was the Movie Edited?</label>
-        <select asp-name="Edited">
-            <option value="true">Y</option>
-            <option value="false">N</option>
-        </select>
-        <br/>
+            <div class="mb-3">
+                <label asp-for="Director">Director's First & Last Name:</label>
+                <input asp-for="Director"/> 
+            </div>
 
-        <label asp-for="CopiedToPlex">Was the Movie Copied to Plex?</label>
-        <select asp-name="CopiedToPlex">
-            <option value="true">Y</option>
-            <option value="false">N</option>
-        </select>
-        <br/>
-        
-        <label asp-for="LentTo">Who is the Movie Lent To?:</label>
-        <input asp-for="LentTo" placeholder="Leave blank if NA"/>
-        <br/>
+            <div class="mb-3">
+                <label asp-for="Rating">Parental Guidance Rating:</label>
+                <select asp-for="Rating">
+                    <option value="">--Select a Rating--</option>
+                    <option value="NR">No Rating/Unrated</option>
+                    <option value="G">G</option>
+                    <option value="PG">PG</option>
+                    <option value="PG-13">PG-13</option>
+                    <option value="R">R</option>
+                    <option value="NC-17">NC-17</option>
+                    <option value="TV-Y">TV-Y</option>
+                    <option value="TV-Y7">TV-Y7</option>
+                    <option value="TV-Y7-FV">TV-Y7-FV</option>
+                    <option value="TV-G">TV-G</option>
+                    <option value="TV-PG">TV-PG</option>
+                    <option value="TV-14">TV-14</option>
+                    <option value="TV-MA">TV-MA</option>
+                </select>
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
 
-        <label asp-for="Notes">Additional Notes:</label>
-        <input asp-for="Notes" placeholder="25 characters or less" maxlength="25"/>
-        <br/>
+            <div class="mb-3">
+                <label asp-for="Edited">Was the Movie Edited?</label>
+                <select asp-name="Edited" required>
+                    <option value="true">Y</option>
+                    <option value="false">N</option>
+                </select>
+            </div>
 
-        <!--Submit form-->
-        <button type="submit">Add Movie to Database</button>
-        <br/>
-        
-        <!--Print out validation summary to users of any
-        errors caused by invalid data entry and which
-        fields were invalidly entered.-->
-        <div asp-validation-summary="All"></div>
-    </form>
+            <div class="mb-3">
+                <label asp-for="CopiedToPlex">Was the Movie Copied to Plex?</label>
+                <select asp-name="CopiedToPlex" required>
+                    <option value="true">Y</option>
+                    <option value="false">N</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LentTo">Who is the Movie Lent To?:</label>
+                <input asp-for="LentTo" placeholder="Leave blank if NA"/>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Notes">Additional Notes:</label>
+                <input asp-for="Notes" placeholder="25 characters or less" maxlength="25"/>
+            </div>
+            
+
+            <!--Submit form-->
+            <button type="submit">Add Movie to Database</button>
+            <br/>
+
+            <!--Print out validation summary to users of any
+            errors caused by invalid data entry and which
+            fields were invalidly entered.-->
+            <div class="mt-3 text-danger" asp-validation-summary="All"></div>
+        </form> 
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </div>
 </body>
 </html>

@@ -8,6 +8,8 @@ namespace Mission6Assignment.Models;
 // for example, int? means that the variable is NOT required
 // for the user to enter in.
 
+
+// My movie class, contains the structure of my database accurately. With validation included where possible.
 public class Movie
 {
     [Key]
